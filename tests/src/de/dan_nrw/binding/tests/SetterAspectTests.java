@@ -15,7 +15,7 @@ import com.jgoodies.binding.beans.Model;
 public class SetterAspectTests {
 
 	@Test
-	public void testSetterAspectInt() {
+	public void listeners_should_be_notified_when_modifing_integer_having_getter() {
 		final TestResult result = new TestResult();
         TestModel model = new TestModel();		
 		model.addPropertyChangeListener(new PropertyChangeListener() {
@@ -34,7 +34,7 @@ public class SetterAspectTests {
 	}
 	
 	@Test
-	public void testSetterAspectString() {
+	public void listeners_should_be_notified_when_modifing_string_property_having_getter() {
 		final TestResult result = new TestResult();
         TestModel model = new TestModel();		
 		model.addPropertyChangeListener(new PropertyChangeListener() {
@@ -53,7 +53,7 @@ public class SetterAspectTests {
 	}
 	
 	@Test
-	public void testSetterAspectWithoutGetter() {
+	public void listeners_should_not_be_notified_because_of_missing_getter() {
 		final TestResult result = new TestResult();
         TestModel model = new TestModel();		
 		model.addPropertyChangeListener(new PropertyChangeListener() {
@@ -70,6 +70,7 @@ public class SetterAspectTests {
 		
 		assertFalse(result.getResult());
 	}
+	
 
 	private class TestResult {
 		
