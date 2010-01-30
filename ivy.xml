@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+    <info organisation="de.dan_nrw"
+          module="binding"
+          status="integration" />
+	<dependencies>
+	   <dependency org="com.jgoodies" name="binding" rev="latest.integration" />
+	   <dependency org="org.aspectj" name="aspectjrt" rev="1.6.7" />
+	   <dependency org="junit" name="junit" rev="latest.integration"/>
+	</dependencies>	
+</ivy-module>
