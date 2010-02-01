@@ -3,10 +3,11 @@
                           xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
     <info organisation="de.dan_nrw"
           module="binding"
-          status="integration" />
+          status="stable"
+          revision="1.0.0" />
 	<dependencies>
-	   <dependency org="com.jgoodies" name="binding" rev="latest.integration" />
+	   <dependency org="com.jgoodies" name="binding" rev="latest.stable" />
 	   <dependency org="org.aspectj" name="aspectjrt" rev="1.6.7" />
-	   <dependency org="junit" name="junit" rev="latest.integration"/>
+	   <dependency org="junit" name="junit" rev="latest.stable" />
 	</dependencies>	
 </ivy-module>

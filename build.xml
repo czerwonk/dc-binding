@@ -44,5 +44,5 @@
            <fileset dir="${build.lib.dir}" excludes="*-sources*.jar, *-javadoc*.jar" />
         </copy>
     </target>
-    <target name="release" depends="clean_up, retrieve_deps, build, create_target_dir, copy_deps, create_signed_jar, clean_up" />
+    <target name="release" depends="clean_up, retrieve_deps, build, create_target_dir, copy_deps, create_signed_jar" />
 </project>
