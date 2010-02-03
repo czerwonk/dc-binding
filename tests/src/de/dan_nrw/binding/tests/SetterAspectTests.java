@@ -22,7 +22,9 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.mockito.ArgumentMatcher;
+
+import static org.mockito.Mockito.*;
 
 import com.jgoodies.binding.beans.Model;
 
@@ -34,77 +36,74 @@ public class SetterAspectTests {
 
 	@Test
 	public void listeners_should_be_notified_when_modifing_integer_having_getter() {
-		final TestResult result = new TestResult();
-        TestModel model = new TestModel();		
-		model.addPropertyChangeListener(new PropertyChangeListener() {
-				
-				@Override
-                public void propertyChange(PropertyChangeEvent evt) {
-					if (evt.getPropertyName().equals("intValue")) {
-						result.setResult(true);	
-					}
-                }
-		});
+        PropertyChangeListener listener = mock(PropertyChangeListener.class);
+		TestModel model = new TestModel();
+		model.addPropertyChangeListener(listener);
 		
-		model.setIntValue(0);
+		int value = 10;
+		model.setIntValue(value);
 		
-		assertTrue(result.getResult());
+        verify(listener, times(1)).propertyChange(argThat(new PropertyChangeEventVerifier("intValue", value)));
 	}
 	
 	@Test
 	public void listeners_should_be_notified_when_modifing_string_property_having_getter() {
-		final TestResult result = new TestResult();
-        TestModel model = new TestModel();		
-		model.addPropertyChangeListener(new PropertyChangeListener() {
-				
-				@Override
-                public void propertyChange(PropertyChangeEvent evt) {
-					if (evt.getPropertyName().equals("stringValue")) {
-						result.setResult(true);	
-					}
-                }
-		});
+	    PropertyChangeListener listener = mock(PropertyChangeListener.class);
+        TestModel model = new TestModel();
+        model.addPropertyChangeListener(listener);
 		
-		model.setStringValue("Test");
+        String value = "Test";
+		model.setStringValue(value);
 		
-		assertTrue(result.getResult());
+        verify(listener, times(1)).propertyChange(argThat(new PropertyChangeEventVerifier("stringValue", value)));
 	}
 	
 	@Test
 	public void listeners_should_not_be_notified_because_of_missing_getter() {
-		final TestResult result = new TestResult();
-        TestModel model = new TestModel();		
-		model.addPropertyChangeListener(new PropertyChangeListener() {
-				
-				@Override
-                public void propertyChange(PropertyChangeEvent evt) {
-					if (evt.getPropertyName().equals("stringValue")) {
-						result.setResult(true);	
-					}
-                }
-		});
+	    PropertyChangeListener listener = mock(PropertyChangeListener.class);
+        TestModel model = new TestModel();
+        model.addPropertyChangeListener(listener);
 		
 		model.setDummy("Test");
 		
-		assertFalse(result.getResult());
+        verify(listener, never()).propertyChange(any(PropertyChangeEvent.class));
+	}
+	
+	
+	private static class PropertyChangeEventVerifier extends ArgumentMatcher<PropertyChangeEvent> {
+	    
+	    private final String expectedName;
+	    private final Object expectedValue;
+	    
+	    
+        /**
+         * Creates a new instance of PropertyChangeEventValidator
+         * @param expectedName
+         * @param expectedValue
+         */
+        private PropertyChangeEventVerifier(String expectedName, Object expectedValue) {
+            super();
+            this.expectedName = expectedName;
+            this.expectedValue = expectedValue;
+        }
+
+                
+        /* (non-Javadoc)
+         * @see org.mockito.ArgumentMatcher#matches(java.lang.Object)
+         */
+        @Override
+        public boolean matches(Object argument) {
+            if (!(argument instanceof PropertyChangeEvent)) {
+                return false;
+            }
+            
+            PropertyChangeEvent event = (PropertyChangeEvent)argument;
+            return (event.getPropertyName().equals(this.expectedName)
+                        && event.getNewValue().equals(this.expectedValue));            
+        }
 	}
 	
 
-	private class TestResult {
-		
-		// Fields
-		private boolean result;
-		
-        // Methods
-        public boolean getResult() {
-        	return this.result;
-        }
-
-        public void setResult(boolean result) {
-        	this.result = result;
-        }
-	}
-	
 	public static class TestModel extends Model {
 		
         private static final long serialVersionUID = 4704806840311176317L;
