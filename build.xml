@@ -17,7 +17,7 @@
         <mkdir dir="${build.target.dir}"/>
     </target>
     <target name="retrieve_deps" depends="init">
-        <ivy:retrieve />
+        <ivy:retrieve conf="build" />
     </target>
     <target name="build" depends="init, retrieve_deps">
         <javac srcdir="${build.src.dir}" 

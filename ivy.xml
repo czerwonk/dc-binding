@@ -5,10 +5,14 @@
           module="binding"
           status="stable"
           revision="1.0.0" />
+    <configurations>
+        <conf name="build" />
+        <conf name="test" extends="build" />
+    </configurations>
 	<dependencies>
 	   <dependency org="com.jgoodies" name="binding" rev="latest.stable" />
 	   <dependency org="org.aspectj" name="aspectjrt" rev="1.6.7" />
-	   <dependency org="junit" name="junit" rev="latest.stable" />
-	   <dependency org="org.mockito" name="mockito-core" rev="latest.stable" />
+	   <dependency org="junit" name="junit" rev="latest.stable" conf="test->default" />
+	   <dependency org="org.mockito" name="mockito-core" rev="latest.stable" conf="test->default" />
 	</dependencies>	
 </ivy-module>
