@@ -7,7 +7,7 @@
           revision="1.0.0" />
     <configurations>
         <conf name="build" />
-        <conf name="test" extends="build" />
+        <conf name="test" extends="build" visibility="private" />
     </configurations>
 	<dependencies>
 	   <dependency org="com.jgoodies" name="binding" rev="latest.stable" />

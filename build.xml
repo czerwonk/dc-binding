@@ -42,7 +42,8 @@
     <target name="ivy_publish" depends="create_signed_jar">
         <ivy:publish overwrite="true" 
                      resolver="local"
-                     artifactspattern="${build.target.dir}/[organisation].[artifact].[ext]" />
+                     artifactspattern="${build.target.dir}/[organisation].[artifact].[ext]"
+                     conf="build" />
     </target>
 	<target name="copy_deps" depends="retrieve_deps, create_target_dir">
         <copy todir="${build.target.dir}">
