@@ -32,7 +32,7 @@ import com.jgoodies.binding.beans.Model;
 /**
  * @author Daniel Czerwonk <d.czerwonk@googlemail.com>
  */
-public class SetterAspectTests {
+public class SetterAspectTestSuite {
 
 	@Test
 	public void listeners_should_be_notified_when_modifing_integer_having_getter() {
